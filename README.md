@@ -1,61 +1,75 @@
-## Course selling website
 
-### Description
+---
 
-Course selling website implementation backend
-Types of users:
-1. Admins
-2. Users
+# Course Selling Website Backend
 
-Admins are allowed to sign up, create courses.
-Users are allowed to sign up, view courses, purchase courses.
-This in the real world would translate to an app like udemy.
+This repository contains the backend implementation of a course selling website. The backend is developed using Node.js and Express, with MongoDB as the database.
 
-Used jwts for authentication.
-Signgin endpoints for both users and admins is introduced.
-In every authenticated requests, jwt in headers (Authorization : "Bearer <actual token>") is sent.
-Mongodb is used to store all the data persistently.
+## Description
+
+The backend of the course selling website supports two types of users: admins and regular users. Admins have the authority to manage courses, while users can view and purchase courses.
+
+## Features
+
+- Authentication for admins and users.
+- Admins can create and manage courses.
+- Users can view available courses and purchase them.
+
+## Setup
+
+1. **Clone the repository:**
+   ```bash
+   git clone <repository-url>
+   cd course-selling-backend
+   ```
+
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+
+3. **Environment setup:**
+   - Ensure you have MongoDB installed and running.
+   - Update the MongoDB connection URL in `db/index.js` to point to your MongoDB instance.
+
+4. **Start the server:**
+   ```bash
+   npm start
+   ```
+
+5. **API Documentation:**
+   - View the API documentation in the `routes` directory for available routes and endpoints.
 
 ## Routes
 
 ### Admin Routes:
 
-- POST /admin/signup
-  Description: Creates a new admin account.
-  Input Body: { username: 'admin', password: 'pass' }
-  Output: { message: 'Admin created successfully' }
-- POST /admin/signin
-  Description: Logs in an admin account.
-  Input Body: { username: 'admin', password: 'pass' }
-  Output: { token: 'your-token' }
-- POST /admin/courses
-  Description: Creates a new course.
-  Input: Headers: { 'Authorization': 'Bearer <your-token>' }, Body: { title: 'course title', description: 'course description', price: 100, imageLink: 'https://linktoimage.com' }
-  Output: { message: 'Course created successfully', courseId: "new course id" }
-- GET /admin/courses
-  Description: Returns all the courses.
-  Input: Headers: { 'Authorization': 'Bearer <your-token>' }
-  Output: { courses: [ { id: 1, title: 'course title', description: 'course description', price: 100, imageLink: 'https://linktoimage.com', published: true }, ... ] }
+- `POST /admin/signup`: Creates a new admin account.
+- `POST /admin/signin`: Logs in an admin account.
+- `POST /admin/courses`: Creates a new course.
+- `GET /admin/courses`: Returns all courses.
 
-### User routes
+### User Routes:
 
-- POST /users/signup
-  Description: Creates a new user account.
-  Input: { username: 'user', password: 'pass' }
-  Output: { message: 'User created successfully' }
-- POST /users/signin
-  Description: Logs in a user account.
-  Input: { username: 'user', password: 'pass' }
-  Output: { token: 'your-token' }
-- GET /users/courses
-  Description: Lists all the courses.
-  Input: Headers: { 'Authorization': 'Bearer <your-token>' }
-  Output: { courses: [ { id: 1, title: 'course title', description: 'course description', price: 100, imageLink: 'https://linktoimage.com', published: true }, ... ] }
-- POST /users/courses/:courseId
-  Description: Purchases a course. courseId in the URL path should be replaced with the ID of the course to be purchased.
-  Input: Headers: { 'Authorization': 'Bearer <your-token>' }
-  Output: { message: 'Course purchased successfully' }
-- GET /users/purchasedCourses
-  Description: Lists all the courses purchased by the user.
-  Input: Headers: { 'Authorization': 'Bearer <your-token>' }
-  Output: { purchasedCourses: [ { id: 1, title: 'course title', description: 'course description', price: 100, imageLink: 'https://linktoimage.com', published: true }, ... ] }
+- `POST /users/signup`: Creates a new user account.
+- `POST /users/signin`: Logs in a user account.
+- `GET /users/courses`: Lists all courses.
+- `POST /users/courses/:courseId`: Purchases a course.
+- `GET /users/purchasedCourses`: Lists purchased courses.
+
+## Technologies Used
+
+- Node.js
+- Express
+- MongoDB
+- JSON Web Tokens (JWT) for authentication
+
+## Contributing
+
+Contributions are welcome! Please fork the repository, make your changes, and submit a pull request. For major changes, please open an issue first to discuss the proposed changes.
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
+
+---
